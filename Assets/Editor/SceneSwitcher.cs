@@ -4,50 +4,63 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class SceneSelector : Editor {
-    //TODO: Paste your favorite Scene Folder here!
-    private const string scenePath = "Assets/Scenes";
+namespace Omniworlds.Scripts.Editor
+{
+    public class SceneSelector : UnityEditor.Editor
+    {
+        //TODO: Paste your favorite Scene Folder here!
+        private const string scenePath = "Assets/Scenes";
 
-    [MenuItem("ItsLit/Scene Selector/Enable")]
-    public static void Enable() {
-        SceneView.duringSceneGui += OnScene;
-    }
+        [MenuItem("ItsLit/Scene Selector/Enable")]
+        public static void Enable()
+        {
+            SceneView.duringSceneGui += OnScene;
+        }
 
-    [MenuItem("ItsLit/Scene Selector/Disable")]
-    public static void Disable() {
-        SceneView.duringSceneGui -= OnScene;
-    }
+        [MenuItem("ItsLit/Scene Selector/Disable")]
+        public static void Disable()
+        {
+            SceneView.duringSceneGui -= OnScene;
+        }
 
-    private static void OnScene(SceneView sceneview) {
-        Handles.BeginGUI();
-        if (GUI.Button(new Rect(10, 10, 80, 25), "Scenes")) {
-            var guids = AssetDatabase.FindAssets("t:scene", new[] {scenePath});
-            var scenes = guids.Select(x => AssetDatabase.GUIDToAssetPath(x));
-            scenes.OrderBy(x => x);
+        private static void OnScene(SceneView sceneview)
+        {
+            Handles.BeginGUI();
+            if (GUI.Button(new Rect(10, 10, 80, 25), "Scenes"))
+            {
+                var guids = AssetDatabase.FindAssets("t:scene", new[] {scenePath});
+                var scenes = guids.Select(x => AssetDatabase.GUIDToAssetPath(x));
+                scenes.OrderBy(x => x);
 
-            GenericMenu menu = new GenericMenu();
-            var currentPath = "";
-            foreach (var scene in scenes) {
-                var sceneDir = Path.GetDirectoryName(scene);
+                GenericMenu menu = new GenericMenu();
+                var currentPath = "";
+                foreach (var scene in scenes)
+                {
+                    var sceneDir = Path.GetDirectoryName(scene);
 
-                if (currentPath != sceneDir) {
-                    menu.AddSeparator("");
-                    currentPath = sceneDir;
+                    if (currentPath != sceneDir)
+                    {
+                        menu.AddSeparator("");
+                        currentPath = sceneDir;
+                    }
+
+                    var sceneName = Path.GetFileNameWithoutExtension(scene);
+                    menu.AddItem(new GUIContent(sceneName), false, OnSceneSelect, scene);
                 }
 
-                var sceneName = Path.GetFileNameWithoutExtension(scene);
-                menu.AddItem(new GUIContent(sceneName), false, OnSceneSelect, scene);
+                menu.ShowAsContext();
             }
-            menu.ShowAsContext();
-        }
-        Handles.EndGUI();
-    }
 
-    private static void OnSceneSelect(object scenePath) {
-        var path = (string) scenePath;
-        if (Application.isPlaying)
-            EditorSceneManager.LoadScene(path);
-        else
-            EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            Handles.EndGUI();
+        }
+
+        private static void OnSceneSelect(object scenePath)
+        {
+            var path = (string) scenePath;
+            if (Application.isPlaying)
+                EditorSceneManager.LoadScene(path);
+            else
+                EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+        }
     }
 }
