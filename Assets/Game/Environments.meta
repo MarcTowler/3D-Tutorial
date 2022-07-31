@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0c807b4446249454e99260095f1b2568
+=======
+<<<<<<< HEAD:Assets/Asset Packs/Animations by Explosive.meta
+guid: 7427c4305fac5554ab117fa08ded664d
+=======
+guid: 0c807b4446249454e99260095f1b2568
+>>>>>>> Dev:Assets/Game/Environments.meta
+>>>>>>> Dev
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

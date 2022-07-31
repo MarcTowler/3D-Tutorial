@@ -26,8 +26,8 @@ namespace Omniworlds.Scripts.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-
-                if (target == null)
+                
+                if (!GetComponent<Fighter>().CanAttack(target))
                 {
                     continue;
                 }
