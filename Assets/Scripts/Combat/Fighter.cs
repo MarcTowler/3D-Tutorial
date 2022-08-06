@@ -16,7 +16,7 @@ namespace Omniworlds.Scripts.Combat
         private float _weaponDamage = 10f;
         
         private Health _target;
-        private float _timeSinceLastAttack;
+        private float _timeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
@@ -59,7 +59,7 @@ namespace Omniworlds.Scripts.Combat
             return Vector3.Distance(transform.position, _target.transform.position) < _weaponRange;
         }
         
-        public bool CanAttack(CombatTarget combatTarget)
+        public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
             
@@ -68,7 +68,7 @@ namespace Omniworlds.Scripts.Combat
             return targetToTest != null && !targetToTest.IsDead;
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             

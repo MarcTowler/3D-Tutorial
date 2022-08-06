@@ -13,5 +13,10 @@ namespace Omniworlds.Scripts.Core
 
             _currentAction = action;
         }
+        
+        public void CancelCurrentAction()
+        {
+            StartAction(null);
+        }
     }
 }

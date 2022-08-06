@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Omniworlds.Scripts.Combat
+namespace Omniworlds.Scripts.Core
 {
     public class Health : MonoBehaviour
     {
@@ -30,6 +30,7 @@ namespace Omniworlds.Scripts.Combat
             if(_isDead) return;
             _isDead = true;
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }
