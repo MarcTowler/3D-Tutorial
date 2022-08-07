@@ -13,6 +13,15 @@ namespace Omniworlds.Scripts.Control
         [SerializeField]
         private float _suspiciousTime = 5f;
         
+        [SerializeField] 
+        private PatrolPath _patrolPath;
+        
+        [SerializeField]
+        private float _waypointTolerance = 1f;
+        
+        [SerializeField]
+        private float _waypointDwellTime = 2f;
+        
         private Fighter _fighter;
         private Health _health;
         private Mover _mover;
@@ -20,6 +29,8 @@ namespace Omniworlds.Scripts.Control
 
         private Vector3 _guardPosition;
         private float _timeSinceLastSawPlayer = Mathf.Infinity;
+        private float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        private int _currentWaypointIndex = 0;
         
         private void Start()
         {
@@ -38,7 +49,6 @@ namespace Omniworlds.Scripts.Control
             
             if(InAttackRangeOfPlayer() && _fighter.CanAttack(_player))
             {
-                _timeSinceLastSawPlayer = 0;
                 AttackBehaviour();
             }
             else if (_timeSinceLastSawPlayer < _suspiciousTime)
@@ -49,15 +59,55 @@ namespace Omniworlds.Scripts.Control
             }
             else
             {
-                GuardBehaviour();
+                PatrolBehaviour();
             }
             
+            UpdateTimers();
+        }
+
+        private void UpdateTimers()
+        {
+            _timeSinceArrivedAtWaypoint += Time.deltaTime;
             _timeSinceLastSawPlayer += Time.deltaTime;
         }
 
-        private void GuardBehaviour()
+        private void PatrolBehaviour()
         {
-            _mover.StartMoveAction(_guardPosition);
+            Vector3 nextPosition = _guardPosition;
+            
+            if(_patrolPath != null)
+            {
+                if (AtWaypoint())
+                {
+                    _timeSinceArrivedAtWaypoint = 0;
+                    CycleWaypoint();
+                }
+                
+                nextPosition = GetCurrentWaypoint();
+            }
+            
+            if(_timeSinceArrivedAtWaypoint > _waypointDwellTime)
+            {
+                _mover.StartMoveAction(nextPosition);
+                
+            }
+        }
+        
+        private bool AtWaypoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            
+            return distanceToWaypoint < _waypointTolerance;
+        }
+        
+        private void CycleWaypoint()
+        {
+            _currentWaypointIndex = _patrolPath.GetNextIndex(_currentWaypointIndex);
+        }
+        
+        private Vector3 GetCurrentWaypoint()
+        {
+            return _patrolPath.GetWaypoint(_currentWaypointIndex);
         }
 
         private void SuspicionBehaviour()
@@ -67,6 +117,7 @@ namespace Omniworlds.Scripts.Control
 
         private void AttackBehaviour()
         {
+            _timeSinceLastSawPlayer = 0;
             _fighter.Attack(_player);
         }
 

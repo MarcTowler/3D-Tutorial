@@ -27,21 +27,25 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5461116126947130515, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
+      propertyPath: _healthPoints
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.908874
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.16
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalRotation.w
@@ -122,6 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chaseDistance: 5
+  _suspiciousTime: 5
+  _patrolPath: {fileID: 0}
+  _waypointTolerance: 1
 --- !u!1001 &4860533258914283509
 PrefabInstance:
   m_ObjectHideFlags: 0
