@@ -6,7 +6,15 @@ namespace Omniworlds.Scripts.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
-        [SerializeField] private Transform _target;
+        [SerializeField] 
+        private Transform _target;
+        
+        [SerializeField] 
+        private float _maxSpeed = 6f;
+
+        [SerializeField] 
+        private float _maxNavPathLength = 40f;
+        
         private Ray _lastRay;
 
         private NavMeshAgent _navMeshAgent;
