@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1750276254, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 471984565502336657, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 471984565502336657, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5461116126947130515, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: _health
@@ -19,21 +27,25 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5461116126947130515, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
+      propertyPath: _healthPoints
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.908874
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.16
       objectReference: {fileID: 0}
     - target: {fileID: 9138074628125720591, guid: cb0dd7f9121b63345bbf64ba9767d847, type: 3}
       propertyPath: m_LocalRotation.w
@@ -101,6 +113,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b12254581e466983413e897a1721d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1546528497087554632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3989636030381051241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39520bf1275cd844788ccaafbd32b0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chaseDistance: 5
+  _suspiciousTime: 5
+  _patrolPath: {fileID: 0}
+  _waypointTolerance: 1
 --- !u!1001 &4860533258914283509
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Omniworlds.Scripts.Core;
 
 namespace Omniworlds.Scripts.Combat
 {

@@ -1,4 +1,5 @@
 ﻿using Omniworlds.Scripts.Combat;
+using Omniworlds.Scripts.Core;
 using Omniworlds.Scripts.Movement;
 using UnityEngine;
 
@@ -6,8 +7,20 @@ namespace Omniworlds.Scripts.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        private Health _health;
+        
+        private void Start()
+        {
+            _health = GetComponent<Health>();
+        }
+        
         private void Update()
         {
+            if(_health.IsDead)
+            {
+                return;
+            }
+            
             if (InteractWithCombat())
             {
                 return;
@@ -27,14 +40,20 @@ namespace Omniworlds.Scripts.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 
-                if (!GetComponent<Fighter>().CanAttack(target))
+                if(target == null)
                 {
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    continue;
+                }
+
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<Fighter>().Attack(target.gameObject);
                 }
 
                 return true;

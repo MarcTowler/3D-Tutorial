@@ -10,15 +10,18 @@ namespace Omniworlds.Scripts.Movement
         private Ray _lastRay;
 
         private NavMeshAgent _navMeshAgent;
+        private Health _health;
 
         private void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _health = GetComponent<Health>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            _navMeshAgent.enabled = !_health.IsDead;
             UpdateAnimator();
         }
 
