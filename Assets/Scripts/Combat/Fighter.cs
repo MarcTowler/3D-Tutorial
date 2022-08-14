@@ -26,7 +26,7 @@ namespace Omniworlds.Scripts.Combat
             if(_target.IsDead) return;
             if (!IsInRange())
             {
-                GetComponent<Mover>().MoveTo(_target.transform.position);
+                GetComponent<Mover>().MoveTo(_target.transform.position, 1f);
             }
             else
             {

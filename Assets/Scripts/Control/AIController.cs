@@ -22,6 +22,10 @@ namespace Omniworlds.Scripts.Control
         [SerializeField]
         private float _waypointDwellTime = 2f;
         
+        [Range(0, 1)]
+        [SerializeField]
+        private float _patrolSpeedFraction = 0.2f;
+        
         private Fighter _fighter;
         private Health _health;
         private Mover _mover;
@@ -88,7 +92,7 @@ namespace Omniworlds.Scripts.Control
             
             if(_timeSinceArrivedAtWaypoint > _waypointDwellTime)
             {
-                _mover.StartMoveAction(nextPosition);
+                _mover.StartMoveAction(nextPosition, _patrolSpeedFraction);
                 
             }
         }
