@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Omniworlds.Scripts.Core
 {
     public class ActionScheduler : MonoBehaviour
     {
-        private IAction _currentAction;
-        
+        IAction currentAction;
+
         public void StartAction(IAction action)
         {
-            if (_currentAction == action) return;
-            _currentAction?.Cancel();
-
-            _currentAction = action;
+            if (currentAction == action) return;
+            if (currentAction != null)
+            {
+                currentAction.Cancel();
+            }
+            currentAction = action;
         }
-        
+
         public void CancelCurrentAction()
         {
             StartAction(null);
