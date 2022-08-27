@@ -79,6 +79,7 @@ namespace Omniworlds.Scripts.Combat
         {
             StopAttack();
             _target = null;
+            GetComponent<Mover>().Cancel();
         }
 
         private void StopAttack()
