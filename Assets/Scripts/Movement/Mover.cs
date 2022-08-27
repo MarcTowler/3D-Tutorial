@@ -6,8 +6,14 @@ namespace Omniworlds.Scripts.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
-        [SerializeField] private Transform _target;
-        private Ray _lastRay;
+        [SerializeField] 
+        private Transform _target;
+        
+        [SerializeField] 
+        private float _maxSpeed = 6f;
+
+        [SerializeField] 
+        private float _maxNavPathLength = 40f;
 
         private NavMeshAgent _navMeshAgent;
         private Health _health;
@@ -38,15 +44,16 @@ namespace Omniworlds.Scripts.Movement
             GetComponent<Animator>().SetFloat("forwardSpeed", speed);
         }
 
-        public void StartMoveAction(Vector3 destination)
+        public void StartMoveAction(Vector3 destination, float speedFraction)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            MoveTo(destination);
+            MoveTo(destination, speedFraction);
         }
 
-        public void MoveTo(Vector3 destination)
+        public void MoveTo(Vector3 destination, float speedFraction)
         {
             _navMeshAgent.destination = destination;
+            _navMeshAgent.speed = _maxSpeed * Mathf.Clamp01(speedFraction);
             _navMeshAgent.isStopped = false;
         }
 
