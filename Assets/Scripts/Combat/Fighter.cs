@@ -1,32 +1,28 @@
-﻿using Omniworlds.Scripts.Core;
-using Omniworlds.Scripts.Movement;
 using UnityEngine;
+using Omniworlds.Scripts.Movement;
+using Omniworlds.Scripts.Core;
 
 namespace Omniworlds.Scripts.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] 
-        private float _weaponRange = 2f;
-        
-        [SerializeField]
-        private float _timeBetweenAttacks = 1.21f;
-        
-        [SerializeField]
-        private float _weaponDamage = 10f;
-        
-        private Health _target;
-        private float _timeSinceLastAttack = Mathf.Infinity;
+        [SerializeField] float weaponRange = 2f;
+        [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] float weaponDamage = 5f;
+
+        Health target;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
-            _timeSinceLastAttack += Time.deltaTime;
-            
-            if (_target == null) return;
-            if(_target.IsDead) return;
-            if (!IsInRange())
+            timeSinceLastAttack += Time.deltaTime;
+
+            if (target == null) return;
+            if (target.IsDead()) return;
+
+            if (!GetIsInRange())
             {
-                GetComponent<Mover>().MoveTo(_target.transform.position, 1f);
+                GetComponent<Mover>().MoveTo(target.transform.position, 1f);
             }
             else
             {
@@ -37,14 +33,12 @@ namespace Omniworlds.Scripts.Combat
 
         private void AttackBehaviour()
         {
-            //Turn to look at the enemy we have targeted
-            transform.LookAt(_target.transform);
-            
-            if(_timeSinceLastAttack > _timeBetweenAttacks)
+            transform.LookAt(target.transform);
+            if (timeSinceLastAttack > timeBetweenAttacks)
             {
-                //This will trigger the Hit() event
+                // This will trigger the Hit() event.
                 TriggerAttack();
-                _timeSinceLastAttack = 0f;
+                timeSinceLastAttack = 0;
             }
         }
 
@@ -54,31 +48,35 @@ namespace Omniworlds.Scripts.Combat
             GetComponent<Animator>().SetTrigger("attack");
         }
 
-        private bool IsInRange()
+        // Animation Event
+        void Hit()
         {
-            return Vector3.Distance(transform.position, _target.transform.position) < _weaponRange;
+            if(target == null) { return; }
+            target.TakeDamage(weaponDamage);
         }
-        
+
+        private bool GetIsInRange()
+        {
+            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+        }
+
         public bool CanAttack(GameObject combatTarget)
         {
-            if (combatTarget == null) return false;
-            
+            if (combatTarget == null) { return false; }
             Health targetToTest = combatTarget.GetComponent<Health>();
-            
-            return targetToTest != null && !targetToTest.IsDead;
+            return targetToTest != null && !targetToTest.IsDead();
         }
 
         public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            
-            _target = combatTarget.GetComponent<Health>();
+            target = combatTarget.GetComponent<Health>();
         }
 
         public void Cancel()
         {
             StopAttack();
-            _target = null;
+            target = null;
             GetComponent<Mover>().Cancel();
         }
 
@@ -87,12 +85,5 @@ namespace Omniworlds.Scripts.Combat
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");
         }
-
-        //Animation event
-        private void Hit()
-        {
-            if(_target == null) return;
-            _target.TakeDamage(_weaponDamage);
-        }
-}
+    }
 }

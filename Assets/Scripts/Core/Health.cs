@@ -1,25 +1,22 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace Omniworlds.Scripts.Core
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] 
-        private int _maxHealth = 100;
-        
-        [SerializeField]
-        private float _healthPoints = 100f;
+        [SerializeField] float healthPoints = 100f;
 
-        private bool _isDead = false;
-        
-        public bool IsDead => _isDead;
-        
+        bool isDead = false;
+
+        public bool IsDead()
+        {
+            return isDead;
+        }
+
         public void TakeDamage(float damage)
         {
-            _healthPoints = Mathf.Clamp(_healthPoints - damage, 0, _maxHealth);
-
-            if (_healthPoints == 0)
+            healthPoints = Mathf.Max(healthPoints - damage, 0);
+            if(healthPoints == 0)
             {
                 Die();
             }
@@ -27,8 +24,9 @@ namespace Omniworlds.Scripts.Core
 
         private void Die()
         {
-            if(_isDead) return;
-            _isDead = true;
+            if (isDead) return;
+
+            isDead = true;
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }

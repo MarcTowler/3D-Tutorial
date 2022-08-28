@@ -1,30 +1,29 @@
-﻿using Omniworlds.Scripts.Control;
-using Omniworlds.Scripts.Core;
 using UnityEngine;
 using UnityEngine.Playables;
+using Omniworlds.Scripts.Core;
+using Omniworlds.Scripts.Control;
 
 namespace Omniworlds.Scripts.Cinematics
 {
     public class CinematicControlRemover : MonoBehaviour
     {
-        private GameObject _player = GameObject.FindWithTag("Player");
-        
-        private void Start()
-        {
+        GameObject player;
+
+        private void Start() {
             GetComponent<PlayableDirector>().played += DisableControl;
             GetComponent<PlayableDirector>().stopped += EnableControl;
+            player = GameObject.FindWithTag("Player");
         }
 
-        private void DisableControl(PlayableDirector pd)
+        void DisableControl(PlayableDirector pd)
         {
-            
-            _player.GetComponent<ActionScheduler>().CancelCurrentAction();
-            _player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<ActionScheduler>().CancelCurrentAction();
+            player.GetComponent<PlayerController>().enabled = false;
         }
-        
-        private void EnableControl(PlayableDirector pd)
+
+        void EnableControl(PlayableDirector pd)
         {
-            _player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<PlayerController>().enabled = true;
         }
     }
 }
