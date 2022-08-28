@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace Omniworlds.Scripts.Cinematics
+namespace RPG.Cinematics
 
 {
     public class CinematicTrigger : MonoBehaviour
