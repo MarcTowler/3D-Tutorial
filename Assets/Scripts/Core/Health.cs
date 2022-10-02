@@ -1,8 +1,9 @@
 using UnityEngine;
+using Omniworlds.Scripts.Saving;
 
 namespace Omniworlds.Scripts.Core
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float healthPoints = 100f;
 
@@ -29,6 +30,21 @@ namespace Omniworlds.Scripts.Core
             isDead = true;
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        public object CaptureState()
+        {
+            return healthPoints;
+        }
+
+        public void RestoreState(object state)
+        {
+            healthPoints = (float)state;
+
+            if (healthPoints == 0)
+            {
+                Die();
+            }
         }
     }
 }
