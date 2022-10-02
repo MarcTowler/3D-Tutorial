@@ -1,32 +1,43 @@
-﻿using Omniworlds.Scripts.Saving;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Omniworlds.Scripts.Saving;
 
 namespace Omniworlds.Scripts.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        const string DefaultSaveFile = "save";
-        
-        private void Update()
+        const string defaultSaveFile = "save";
+        [SerializeField] float fadeInTime = 0.2f;
+
+        IEnumerator Start() {
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
+            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+            yield return fader.FadeIn(fadeInTime);
+        }
+
+        void Update()
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
                 Load();
             }
-            else if(Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 Save();
             }
         }
-        
-        private void Load()
+
+        public void Save()
         {
-            GetComponent<SavingSystem>().Load(DefaultSaveFile);
+            GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
-        
-        private void Save()
+
+        public void Load()
         {
-            GetComponent<SavingSystem>().Save(DefaultSaveFile);
+            GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
     }
 }
