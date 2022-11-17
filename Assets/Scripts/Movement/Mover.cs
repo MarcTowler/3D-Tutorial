@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Omniworlds.Scripts.Core;
+using RPG.Core;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
-using Omniworlds.Scripts.Saving;
 
-namespace Omniworlds.Scripts.Movement
+namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {
@@ -64,6 +64,7 @@ namespace Omniworlds.Scripts.Movement
             GetComponent<NavMeshAgent>().enabled = false;
             transform.position = position.ToVector();
             GetComponent<NavMeshAgent>().enabled = true;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }

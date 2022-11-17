@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Omniworlds.Scripts.Control
+namespace RPG.Control
 {
     public class PatrolPath : MonoBehaviour
     {

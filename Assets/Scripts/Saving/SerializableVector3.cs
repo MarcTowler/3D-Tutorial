@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace Omniworlds.Scripts.Saving
+namespace RPG.Saving
 {
     [System.Serializable]
     public class SerializableVector3

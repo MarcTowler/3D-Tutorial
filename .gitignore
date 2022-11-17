@@ -9,15 +9,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/[Aa]ssets/Procedural\ Worlds/
-/[Aa]ssets/Procedural\ Worlds/*
-/[Aa]ssets/Procedural\ Worlds.meta
-/[Aa]ssets/Plugins/
-/[Aa]ssets/Plugins.meta
-/[Aa]ssets/Plugins/*
-/[Aa]ssets/ConsolePro.meta
-/[Aa]ssets/ConsolePro/
-/[Aa]ssets/ConsolePro/*
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -55,7 +46,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-.idea/*
 
 # Unity3D generated meta files
 *.pidb.meta

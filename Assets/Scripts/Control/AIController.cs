@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Omniworlds.Scripts.Combat;
-using Omniworlds.Scripts.Core;
-using Omniworlds.Scripts.Movement;
+using RPG.Combat;
+using RPG.Core;
+using RPG.Movement;
 using UnityEngine;
 
-namespace Omniworlds.Scripts.Control
+namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {

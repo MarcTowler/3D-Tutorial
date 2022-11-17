@@ -1,7 +1,7 @@
 using UnityEngine;
-using Omniworlds.Scripts.Core;
+using RPG.Core;
 
-namespace Omniworlds.Scripts.Combat
+namespace RPG.Combat
 {
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour

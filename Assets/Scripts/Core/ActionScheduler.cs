@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Omniworlds.Scripts.Core
+namespace RPG.Core
 {
     public class ActionScheduler : MonoBehaviour
     {

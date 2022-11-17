@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Playables;
-using Omniworlds.Scripts.Core;
-using Omniworlds.Scripts.Control;
+using RPG.Core;
+using RPG.Control;
 
-namespace Omniworlds.Scripts.Cinematics
+namespace RPG.Cinematics
 {
     public class CinematicControlRemover : MonoBehaviour
     {

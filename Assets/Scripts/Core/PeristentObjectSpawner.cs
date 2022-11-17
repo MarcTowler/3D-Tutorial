@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Omniworlds.Scripts.Core
+namespace RPG.Core
 {
     public class PeristentObjectSpawner : MonoBehaviour
     {

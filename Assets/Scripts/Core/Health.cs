@@ -1,7 +1,7 @@
+using RPG.Saving;
 using UnityEngine;
-using Omniworlds.Scripts.Saving;
 
-namespace Omniworlds.Scripts.Core
+namespace RPG.Core
 {
     public class Health : MonoBehaviour, ISaveable
     {
@@ -39,9 +39,9 @@ namespace Omniworlds.Scripts.Core
 
         public void RestoreState(object state)
         {
-            healthPoints = (float)state;
-
-            if (healthPoints == 0)
+            healthPoints = (float) state;
+            
+            if (healthPoints <= 0)
             {
                 Die();
             }

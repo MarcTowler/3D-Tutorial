@@ -1,4 +1,4 @@
-﻿namespace Omniworlds.Scripts.Saving
+namespace RPG.Saving
 {
     public interface ISaveable
     {

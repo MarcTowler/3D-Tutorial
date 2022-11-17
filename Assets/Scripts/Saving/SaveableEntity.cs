@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using Omniworlds.Scripts.Core;
+using RPG.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Omniworlds.Scripts.Saving
+namespace RPG.Saving
 {
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
